@@ -492,6 +492,7 @@ img {
     }
 
 .large-hero__title {
+    //background: red;
     margin: 0;
     font-weight: 300;
     color: #2f5572;
