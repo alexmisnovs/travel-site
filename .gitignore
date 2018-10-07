@@ -11,7 +11,8 @@
 *.sass-cache
 node_modules/
 .tmp/
-
+test/
+responsive-images.html
 # OS or Editor folders
 .DS_Store
 Thumbs.db
