@@ -763,21 +763,29 @@ a {
         font-weight :500;
     }
 
+.section-title--blue {
+        color: #2f5572;
+    }
+
 .section-title__icon {
     
         display: block;
         margin-left: auto;
         margin-right:auto; 
         margin-bottom: .6rem;
+        
     }
 
 @media (min-width: 530px){
 
 .section-title__icon {
+            position: relative;
+            top:8px;
             margin-right: 0.5rem;
             margin-left: 0;
             margin-bottom: 0;
             display: inline
+        
     }
     }
 
