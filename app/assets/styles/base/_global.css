@@ -5,3 +5,7 @@ body {
 img {
     max-width: 100%;
 }
+/** how the element sizes are calculated by browsers **/
+*{
+    box-sizing: border-box;
+}
