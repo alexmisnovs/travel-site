@@ -70,23 +70,107 @@
 "use strict";
 
 
-var $ = __webpack_require__(1);
-Person = __webpack_require__(2);
+var _Person = __webpack_require__(1);
+
+var $ = __webpack_require__(2);
+//People = require('./modules/Person'); old way of importing the module
+
 
 console.log('scripts bundled automatically');
 
-var john = new Person('John', 'Blue');
-
+var john = new _Person.Person('John', 'Blue');
+// have to do this if you export multiple classes from the same module. Confusuin is because I used fileName Person
 john.greet();
 
-var jane = new Person('Jane', 'Orange');
+var jane = new _Person.Adult('Jane', 'Orange');
 
 jane.greet();
+jane.payTaxes();
 
 $('h1').remove();
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Person = function () {
+    function Person(name, color) {
+        _classCallCheck(this, Person);
+
+        this.name = name;
+        this.color = color;
+    }
+
+    _createClass(Person, [{
+        key: 'greet',
+        value: function greet() {
+            console.log('Hi there, my name is ' + this.name + '. And my fav color is ' + this.color);
+        }
+    }]);
+
+    return Person;
+}();
+
+var Adult = function (_Person) {
+    _inherits(Adult, _Person);
+
+    function Adult() {
+        _classCallCheck(this, Adult);
+
+        return _possibleConstructorReturn(this, (Adult.__proto__ || Object.getPrototypeOf(Adult)).apply(this, arguments));
+    }
+
+    _createClass(Adult, [{
+        key: 'payTaxes',
+        value: function payTaxes() {
+            console.log(this.name + ' now owes $0 taxes');
+        }
+    }]);
+
+    return Adult;
+}(Person);
+/**  Old way pre ES6 of exporting modules
+ * module.exports = {
+    Person: Person, 
+    Adult: Adult
+};
+ */
+// new way ES6
+
+
+exports.Person = Person;
+exports.Adult = Adult;
+
+//module.exports = Person;
+// console.log('Hello from Person JS');
+// module.exports.superProperty = "Super property";
+// module.exports.exampleFunction = function(a,b){
+//     return a+b;
+// }
+// module.exports.class = {
+//     greet: function(name){
+//         console.log('hello my name is '+ name);
+//     }
+// }
+// so practically we can export anything with exports. Variables, functions etc what we can use in app.js
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10344,35 +10428,6 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function Person(name, color) {
-
-    this.name = name;
-    this.color = color;
-    this.greet = function () {
-        console.log('Hello There, my name is ' + this.name + '. And my fav color is ' + this.color);
-    };
-}
-module.exports = Person;
-//module.exports = Person;
-// console.log('Hello from Person JS');
-// module.exports.superProperty = "Super property";
-// module.exports.exampleFunction = function(a,b){
-//     return a+b;
-// }
-// module.exports.class = {
-//     greet: function(name){
-//         console.log('hello my name is '+ name);
-//     }
-// }
-// so practically we can export anything with exports. Variables, functions etc what we can use in app.js
 
 /***/ })
 /******/ ]);
