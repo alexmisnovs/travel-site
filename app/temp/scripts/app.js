@@ -67,10 +67,13 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var $ = __webpack_require__(1);
- Person = __webpack_require__(2);
+"use strict";
 
- console.log('scripts bundled automatically');
+
+var $ = __webpack_require__(1);
+Person = __webpack_require__(2);
+
+console.log('scripts bundled automatically');
 
 var john = new Person('John', 'Blue');
 
@@ -78,7 +81,7 @@ john.greet();
 
 var jane = new Person('Jane', 'Orange');
 
-jane.greet();   
+jane.greet();
 
 $('h1').remove();
 
@@ -10344,16 +10347,18 @@ return jQuery;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function Person (name, color) {
+"use strict";
+
+
+function Person(name, color) {
 
     this.name = name;
     this.color = color;
-    this.greet = function(){
-        console.log('Hello There, my name is '+this.name + '. And my fav color is '+this.color);
-    }
-
+    this.greet = function () {
+        console.log('Hello There, my name is ' + this.name + '. And my fav color is ' + this.color);
+    };
 }
 module.exports = Person;
 //module.exports = Person;
