@@ -13,6 +13,7 @@ node_modules/
 .tmp/
 test/
 responsive-images.html
+app/assets/scripts/modules/Person.js
 # OS or Editor folders
 .DS_Store
 Thumbs.db

@@ -70,24 +70,15 @@
 "use strict";
 
 
-var _Person = __webpack_require__(1);
+var _MobileMenu = __webpack_require__(1);
 
-var $ = __webpack_require__(2);
+var _MobileMenu2 = _interopRequireDefault(_MobileMenu);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mobileMenu = new _MobileMenu2.default();
 //People = require('./modules/Person'); old way of importing the module
-
-
-console.log('scripts bundled automatically');
-
-var john = new _Person.Person('John', 'Blue');
-// have to do this if you export multiple classes from the same module. Confusuin is because I used fileName Person
-john.greet();
-
-var jane = new _Person.Adult('Jane', 'Orange');
-
-jane.greet();
-jane.payTaxes();
-
-$('h1').remove();
+//import {Person, Adult} from './modules/Person';
 
 /***/ }),
 /* 1 */
@@ -100,74 +91,53 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); //var $ = require('jquery');
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+var _jquery = __webpack_require__(2);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Person = function () {
-    function Person(name, color) {
-        _classCallCheck(this, Person);
+var MobileMenu = function () {
+    function MobileMenu() {
+        _classCallCheck(this, MobileMenu);
 
-        this.name = name;
-        this.color = color;
+        //console.log('hi from mobile menu');
+        /** a bad example.. Spagetti way of coding Jquery.. 
+         $('.site-header__menu-icon').click(function(){
+            console.log('Top menu was clicked');
+         });
+         **/
+        this.siteHeader = (0, _jquery2.default)('.site-header');
+        this.menuContent = (0, _jquery2.default)('.site-header__menu-content');
+        this.menuIcon = (0, _jquery2.default)('.site-header__menu-icon');
+        this.events();
     }
 
-    _createClass(Person, [{
-        key: 'greet',
-        value: function greet() {
-            console.log('Hi there, my name is ' + this.name + '. And my fav color is ' + this.color);
+    _createClass(MobileMenu, [{
+        key: 'events',
+        value: function events() {
+            //list all events we want to watch for in this case - Click.
+            this.menuIcon.click(this.toggleTheMenu.bind(this));
+        }
+    }, {
+        key: 'toggleTheMenu',
+        value: function toggleTheMenu() {
+
+            this.menuContent.toggleClass("site-header__menu-content--is-visible");
+            this.siteHeader.toggleClass("site-header--is-expanded");
+            this.menuIcon.toggleClass("site-header__menu-icon--close-x");
         }
     }]);
 
-    return Person;
+    return MobileMenu;
 }();
 
-var Adult = function (_Person) {
-    _inherits(Adult, _Person);
-
-    function Adult() {
-        _classCallCheck(this, Adult);
-
-        return _possibleConstructorReturn(this, (Adult.__proto__ || Object.getPrototypeOf(Adult)).apply(this, arguments));
-    }
-
-    _createClass(Adult, [{
-        key: 'payTaxes',
-        value: function payTaxes() {
-            console.log(this.name + ' now owes $0 taxes');
-        }
-    }]);
-
-    return Adult;
-}(Person);
-/**  Old way pre ES6 of exporting modules
- * module.exports = {
-    Person: Person, 
-    Adult: Adult
-};
- */
-// new way ES6
-
-
-exports.Person = Person;
-exports.Adult = Adult;
-
-//module.exports = Person;
-// console.log('Hello from Person JS');
-// module.exports.superProperty = "Super property";
-// module.exports.exampleFunction = function(a,b){
-//     return a+b;
-// }
-// module.exports.class = {
-//     greet: function(name){
-//         console.log('hello my name is '+ name);
-//     }
-// }
-// so practically we can export anything with exports. Variables, functions etc what we can use in app.js
+exports.default = MobileMenu;
 
 /***/ }),
 /* 2 */
