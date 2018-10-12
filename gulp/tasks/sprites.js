@@ -4,6 +4,11 @@ rename = require('gulp-rename'),
 del = require('del');
 
 var config = {
+    shape: {
+      spacing: {
+         padding: 1
+      }  
+    },
      mode : {
         css:{
             sprite: 'sprite.svg',
@@ -27,9 +32,18 @@ gulp.task('createSprite', ['beginClean'] , function(){
     .pipe(svgSprite(config))
     .pipe(gulp.dest('./app/temp/sprite/'));
 });
+
+// doesnt work.. so leaving out the PNGs
+// gulp.task('createPNGcopy', ['createSprite'], function(){
+//     return gulp.src('./app/temp/sprite/css/*.svg')
+//     .pipe(svg2png())
+//     .pipe(gulp.dest('./app/temp/sprite/css'));
+// });
+
+
 gulp.task('copySpriteFile', ['createSprite'] , function(){
     return gulp.src('./app/temp/sprite/css/**/*.svg')
-    .pipe(gulp.dest('./app/assets/images/sprites'));
+    .pipe(gulp.dest('./app/assets/images/sprites/'));
 
 })
 
@@ -43,4 +57,4 @@ gulp.task('endClean', ['copySpriteFile' ,'copySpriteCSS'] , function(){
     return del('./app/temp/sprite');
 });
 
-gulp.task('icons', ['beginClean','createSprite', 'copySpriteCSS', 'copySpriteFile', 'endClean']);
+gulp.task('icons', ['beginClean','createSprite','copySpriteCSS', 'copySpriteFile', 'endClean']);
